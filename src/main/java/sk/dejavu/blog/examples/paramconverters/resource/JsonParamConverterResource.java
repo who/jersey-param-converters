@@ -1,5 +1,7 @@
 package sk.dejavu.blog.examples.paramconverters.resource;
 
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
@@ -14,10 +16,12 @@ import sk.dejavu.blog.examples.paramconverters.model.Entity;
  */
 @Path("json-param-converter")
 @Produces("application/json")
+@Api(value = "JsonParamConverterResource")
 public class JsonParamConverterResource {
 
     @GET
     @Path("query")
+    @ApiOperation(value = "getViaQueryParam")
     public Entity getViaQueryParam(
             @QueryParam("entity")
             @DefaultValue("{\"Entity\":{\"foo\":\"bar\",\"bar\":\"foo\"}}")
@@ -27,6 +31,7 @@ public class JsonParamConverterResource {
 
     @GET
     @Path("header")
+    @ApiOperation(value = "getViaHeaderParam")
     public Entity getViaHeaderParam(@HeaderParam("Entity") final Entity entity) {
         return entity;
     }
